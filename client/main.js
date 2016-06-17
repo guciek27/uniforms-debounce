@@ -1,14 +1,14 @@
 import { Meteor } from 'meteor/meteor';
 import React, { Component } from 'react';
+import { Texts } from '../imports/api/texts';
+import { updateText } from '../imports/api/methods';
 import { debounce } from 'throttle-debounce';
 import { render } from 'react-dom';
 import { AutoForm } from 'uniforms';
 import { TextField, ListField, ListItemField } from 'uniforms-unstyled';
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { textsSchema } from '../imports/api/texts.js';
-
-const testModel = {
-};
+import { createContainer } from 'meteor/react-meteor-data';
 
 class TestForm extends Component {
   constructor(props) {
@@ -17,14 +17,18 @@ class TestForm extends Component {
   }
 
   edit(doc) {
-    textsSchema.clean(doc);
-    console.log(doc);
+    const { textsModel } = this.props;
+    const cleanedDoc = textsSchema.clean(doc);
+
+    Meteor.call('updateText', textsModel._id, cleanedDoc);
   }
   render() {
+    const { textsModel } = this.props;
+
     return (
       <AutoForm
         schema={ textsSchema }
-        model={ testModel }
+        model={ textsModel }
         autosave={ true }
         onSubmit={ doc => this.edit(doc) }
       >
@@ -39,6 +43,14 @@ class TestForm extends Component {
   }
 }
 
+const TestFormContainer = createContainer(() => {
+  const subscriptionTexts = Meteor.subscribe('texts');
+
+  return {
+    textsModel: Texts.findOne(),
+  };
+}, TestForm);
+
 Meteor.startup(() => {
-  render(<TestForm/>, document.getElementById('react-root'))
+  render(<TestFormContainer/>, document.getElementById('react-root'))
 });

@@ -7,3 +7,4 @@ es5-shim
 ecmascript
 aldeed:collection2
 aldeed:simple-schema
+react-meteor-data
