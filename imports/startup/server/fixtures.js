@@ -6,6 +6,10 @@ const texts = [{
 }];
 
 texts.forEach(({ title }) => {
-  const textId = Texts.insert({ title: title });
-  console.log(textId);
+  const texts = Texts.findOne();
+
+  if (!texts) {
+    const textId = Texts.insert({ title: title });
+    console.log(textId);
+  }
 });
