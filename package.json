@@ -1,0 +1,17 @@
+{
+  "name": "uniforms-issue-29",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "meteor-node-stubs": "~0.2.0",
+    "react": "https://registry.npmjs.org/react/-/react-15.1.0.tgz",
+    "react-addons-pure-render-mixin": "^15.1.0",
+    "react-addons-update": "^15.1.0",
+    "react-dom": "^15.1.0",
+    "throttle-debounce": "^1.0.1",
+    "uniforms": "1.0.0-rc.16",
+    "uniforms-unstyled": "1.0.0-rc.16"
+  }
+}

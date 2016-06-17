@@ -1,0 +1,9 @@
+meteor-base
+mongo
+static-html
+standard-minifier-css
+standard-minifier-js
+es5-shim
+ecmascript
+aldeed:collection2
+aldeed:simple-schema
